@@ -1,0 +1,16 @@
+@import 'src/styles/_colors.scss';
+
+.header-area {
+    padding: 4%;
+    background-color: $main-color;
+    margin: 0;
+}
+
+.title-logo {
+    font-size: 3em;
+}
+
+.title-date {
+    font-size: 1.3em;
+    margin-top: 30px;
+}
