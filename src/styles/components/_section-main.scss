@@ -1,5 +1,11 @@
+@import 'src/styles/_colors.scss';
+
 .main-area {
     display: flex;
-    margin-top: 3%;
+    margin: 3% 25%;
+}
+
+.main-area h3 {
+    color: $second-color;
 }
 
