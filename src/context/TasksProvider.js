@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 const TaskContext = createContext({});
 
 export const TaskProvider = ({ children }) => {
-    const [tasks, setTasks] = useState({});
+    const [tasks, setTasks] = useState([{ to_be_done: [] }, { done: [] }]);
     return (
         <TaskContext.Provider value={{ tasks, setTasks }}>
             {children}
