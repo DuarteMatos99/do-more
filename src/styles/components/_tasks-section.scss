@@ -8,8 +8,12 @@
     padding-right: 25%;
 }
 
+.tasks-area h3 {
+    color: $secondary-color;
+}
+
 hr {
     height: auto;
     border: none;
-    border-left: 1px solid $main-color;
+    border-left: 1px solid $secondary-color;
 }
