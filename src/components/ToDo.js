@@ -4,6 +4,8 @@ import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
 import useTasks from "../hooks/useTasks.js";
 import { v4 as uuidv4 } from "uuid";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const iconButtonStyles = {
     width: "32px",
@@ -15,6 +17,23 @@ const iconButtonStyles = {
 const ToDo = () => {
     const { tasks, setTasks } = useTasks();
     const [recentTask, setRecentTask] = React.useState("");
+    const [pagination, setPagination] = React.useState({
+        current_page: 1,
+        tasks_per_page: 4,
+    });
+    const [tasksPaginated, setTasksPaginated] = React.useState([]);
+
+    function changeTasksPaginated() {
+        const indexOfLastPost =
+            pagination.current_page * pagination.tasks_per_page;
+        const indexOfFirstPost = indexOfLastPost - pagination.tasks_per_page;
+        const correct_tasks = tasks[0].to_be_done.slice(
+            indexOfFirstPost,
+            indexOfLastPost
+        );
+        console.log(tasks[0].to_be_done);
+        setTasksPaginated(correct_tasks);
+    }
 
     function changeRecentTask(e) {
         setRecentTask(e.target.value);
@@ -25,8 +44,8 @@ const ToDo = () => {
         setTasks([
             {
                 to_be_done: [
-                    ...tasks[0].to_be_done,
                     { uuid: generated_uuid, content: recentTask },
+                    ...tasks[0].to_be_done,
                 ],
             },
             { done: [...tasks[1].done] },
@@ -46,15 +65,19 @@ const ToDo = () => {
                     return obj !== checkedTask;
                 }),
             },
-            { done: [...tasks[1].done, checkedTask] },
+            { done: [checkedTask, ...tasks[1].done] },
         ]);
     }
+
+    React.useEffect(() => {
+        changeTasksPaginated();
+    }, [tasks]);
 
     return (
         <section className="to-do-area">
             <h3>To Do</h3>
             <div className="tasks-unchecked">
-                {tasks[0].to_be_done.map((obj) => {
+                {tasksPaginated.map((obj) => {
                     return (
                         <div className="single-task" key={obj.uuid}>
                             <input
@@ -79,6 +102,16 @@ const ToDo = () => {
                         value={recentTask}
                     />
                 </div>
+            </div>
+
+            {/*Pagination*/}
+            <div className="pagination">
+                <IconButton>
+                    <ChevronLeftIcon />
+                </IconButton>
+                <IconButton>
+                    <ChevronRightIcon />
+                </IconButton>
             </div>
         </section>
     );

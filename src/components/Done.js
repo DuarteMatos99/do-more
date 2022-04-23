@@ -11,7 +11,7 @@ const Done = () => {
 
         setTasks([
             {
-                to_be_done: [...tasks[0].to_be_done, checkedTask],
+                to_be_done: [checkedTask, ...tasks[0].to_be_done],
             },
             {
                 done: tasks[1].done.filter(function (obj) {
