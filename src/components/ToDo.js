@@ -20,10 +20,26 @@ const ToDo = () => {
     const [pagination, setPagination] = React.useState({
         current_page: 1,
         tasks_per_page: 4,
+        page_numbers: [],
     });
     const [tasksPaginated, setTasksPaginated] = React.useState([]);
 
+    function updatePageNumbers(tasksLength) {
+        const pageNumbers = [];
+
+        for (
+            let i = 1;
+            i <= Math.ceil(tasksLength / pagination.tasks_per_page);
+            i++
+        ) {
+            pageNumbers.push(i);
+        }
+        console.log(pageNumbers);
+        setPagination({ ...pagination, page_numbers: pageNumbers });
+    }
+
     function changeTasksPaginated() {
+        const tasksLength = tasks[0].to_be_done.length;
         const indexOfLastPost =
             pagination.current_page * pagination.tasks_per_page;
         const indexOfFirstPost = indexOfLastPost - pagination.tasks_per_page;
@@ -31,8 +47,19 @@ const ToDo = () => {
             indexOfFirstPost,
             indexOfLastPost
         );
-        console.log(tasks[0].to_be_done);
         setTasksPaginated(correct_tasks);
+
+        if (tasksLength % pagination.tasks_per_page === 0) {
+            updatePageNumbers(tasksLength);
+        }
+    }
+
+    function handleNextPage() {
+        const nextPage = pagination.current_page + 1;
+        const lastPagePagination = pagination.page_numbers.at(-1);
+        if (nextPage <= lastPagePagination) {
+            setPagination({ ...pagination, current_page: nextPage });
+        }
     }
 
     function changeRecentTask(e) {
@@ -71,7 +98,7 @@ const ToDo = () => {
 
     React.useEffect(() => {
         changeTasksPaginated();
-    }, [tasks]);
+    }, [tasks, pagination.current_page]);
 
     return (
         <section className="to-do-area">
@@ -109,7 +136,7 @@ const ToDo = () => {
                 <IconButton>
                     <ChevronLeftIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={handleNextPage}>
                     <ChevronRightIcon />
                 </IconButton>
             </div>
