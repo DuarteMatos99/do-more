@@ -24,8 +24,9 @@ const ToDo = () => {
     });
     const [tasksPaginated, setTasksPaginated] = React.useState([]);
 
-    function updatePageNumbers(tasksLength) {
-        const pageNumbers = [];
+    function updatePageNumbers() {
+        let pageNumbers = [];
+        const tasksLength = tasks[0].to_be_done.length;
 
         for (
             let i = 1;
@@ -34,7 +35,9 @@ const ToDo = () => {
         ) {
             pageNumbers.push(i);
         }
-        console.log(pageNumbers);
+
+        if (pageNumbers.length === 0) pageNumbers = [1];
+
         setPagination({ ...pagination, page_numbers: pageNumbers });
     }
 
@@ -49,8 +52,11 @@ const ToDo = () => {
         );
         setTasksPaginated(correct_tasks);
 
-        if (tasksLength % pagination.tasks_per_page === 0) {
-            updatePageNumbers(tasksLength);
+        if (
+            tasksLength % pagination.tasks_per_page === 0 + 1 ||
+            correct_tasks.length === 0
+        ) {
+            updatePageNumbers();
         }
     }
 
@@ -59,6 +65,14 @@ const ToDo = () => {
         const lastPagePagination = pagination.page_numbers.at(-1);
         if (nextPage <= lastPagePagination) {
             setPagination({ ...pagination, current_page: nextPage });
+        }
+    }
+
+    function handlePreviousPage() {
+        const previousPage = pagination.current_page - 1;
+        const lastPagePagination = pagination.page_numbers.at(0);
+        if (previousPage >= lastPagePagination) {
+            setPagination({ ...pagination, current_page: previousPage });
         }
     }
 
@@ -100,6 +114,12 @@ const ToDo = () => {
         changeTasksPaginated();
     }, [tasks, pagination.current_page]);
 
+    React.useEffect(() => {
+        if (tasksPaginated.length === 0) {
+            handlePreviousPage();
+        }
+    }, [tasksPaginated]);
+
     return (
         <section className="to-do-area">
             <h3>To Do</h3>
@@ -133,9 +153,12 @@ const ToDo = () => {
 
             {/*Pagination*/}
             <div className="pagination">
-                <IconButton>
+                <IconButton onClick={handlePreviousPage}>
                     <ChevronLeftIcon />
                 </IconButton>
+                {`${pagination.current_page} - ${pagination.page_numbers.at(
+                    -1
+                )}`}
                 <IconButton onClick={handleNextPage}>
                     <ChevronRightIcon />
                 </IconButton>
