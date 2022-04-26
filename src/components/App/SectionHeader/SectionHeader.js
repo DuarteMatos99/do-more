@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/components/_section-header.scss";
+import "#styles/components/_section-header.scss";
 import TitleDate from "./TitleDate";
 
 const date_title = TitleDate();

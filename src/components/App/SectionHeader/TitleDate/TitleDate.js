@@ -1,5 +1,3 @@
-import React from "react";
-
 const week_days = [
     "Sunday",
     "Monday",

@@ -1,6 +1,6 @@
 import React from "react";
-import useTasks from "../hooks/useTasks";
-import "../styles/components/_done.scss";
+import useTasks from "../../../../hooks/useTasks";
+import "#styles/components/_done.scss";
 
 const Done = () => {
     const { tasks, setTasks } = useTasks();

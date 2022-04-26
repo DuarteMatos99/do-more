@@ -1,8 +1,8 @@
 import React from "react";
-import "../styles/components/_to-do.scss";
+import "#styles/components/_to-do.scss";
 import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
-import useTasks from "../hooks/useTasks.js";
+import useTasks from "#hooks/useTasks.js";
 import { v4 as uuidv4 } from "uuid";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -41,6 +41,7 @@ const ToDo = () => {
         setPagination({ ...pagination, page_numbers: pageNumbers });
     }
 
+    // updates tasks by current current page
     function changeTasksPaginated() {
         const tasksLength = tasks[0].to_be_done.length;
         const indexOfLastPost =
