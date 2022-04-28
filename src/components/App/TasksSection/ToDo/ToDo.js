@@ -1,11 +1,12 @@
 import React from "react";
-import "#styles/components/_to-do.scss";
-import AddIcon from "@mui/icons-material/Add";
-import IconButton from "@mui/material/IconButton";
-import useTasks from "#hooks/useTasks.js";
 import { v4 as uuidv4 } from "uuid";
+import AddIcon from "@mui/icons-material/Add";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import IconButton from "@mui/material/IconButton";
+
+import "#styles/components/_tasks.scss";
+import useTasks from "#hooks/useTasks.js";
 
 const iconButtonStyles = {
     width: "32px",
@@ -154,7 +155,7 @@ const ToDo = () => {
 
             {/*Pagination*/}
             <div className="pagination">
-                <IconButton onClick={handlePreviousPage}>
+                <IconButton onClick={handlePreviousPage} sx={{ padding: 0.3 }}>
                     <ChevronLeftIcon />
                 </IconButton>
                 {`${pagination.current_page} - ${pagination.page_numbers.at(
