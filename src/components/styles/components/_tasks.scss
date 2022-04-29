@@ -9,6 +9,12 @@
     position: relative;
 }
 
+.single-task input, ::-webkit-input-placeholder {
+    outline: none;
+    border: none;
+    font-size: 1em;
+}
+
 .done-area {
     width: 50%;
     height: 280px;

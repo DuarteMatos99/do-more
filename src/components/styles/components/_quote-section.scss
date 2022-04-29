@@ -1,4 +1,10 @@
 .quote-area {
-    margin-top: 15%;
+    margin-top: 12%;
     text-align: center;
+}
+
+.quote {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
 }

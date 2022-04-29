@@ -10,7 +10,7 @@ const QuoteSection = () => {
 
     const getQuoteAPI = async () => {
         const response = await fetch(
-            "https://api.quotable.io/random?maxLength=100"
+            "https://api.quotable.io/random?maxLength=80"
         );
         const data = await response.json();
         if (response.ok) {
@@ -33,8 +33,10 @@ const QuoteSection = () => {
 
     return (
         <section className="quote-area">
-            <h3>{quoteInfo.quote}</h3>
-            <p>-{quoteInfo.author}</p>
+            <div className="quote">
+                <h3>{`"${quoteInfo.quote}"`}</h3>
+                <p>{`- ${quoteInfo.author}`}</p>
+            </div>
         </section>
     );
 };

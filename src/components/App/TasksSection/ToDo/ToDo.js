@@ -161,7 +161,7 @@ const ToDo = () => {
                 {`${pagination.current_page} - ${pagination.page_numbers.at(
                     -1
                 )}`}
-                <IconButton onClick={handleNextPage}>
+                <IconButton onClick={handleNextPage} sx={{ padding: 0.3 }}>
                     <ChevronRightIcon />
                 </IconButton>
             </div>
