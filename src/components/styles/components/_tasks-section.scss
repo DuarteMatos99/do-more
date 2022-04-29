@@ -3,9 +3,7 @@
 .tasks-area {
     display: flex;
     justify-content: center;
-    margin-top: 4%;
-    padding-left: 25%;
-    padding-right: 25%;
+    margin-top: 8%;
 }
 
 .tasks-area h3 {
@@ -17,3 +15,4 @@ hr {
     border: none;
     border-left: 1px solid $secondary-color;
 }
+

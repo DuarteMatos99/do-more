@@ -119,13 +119,13 @@ const Done = () => {
             </div>
             {/*Pagination*/}
             <div className="pagination">
-                <IconButton onClick={handlePreviousPage}>
+                <IconButton onClick={handlePreviousPage} sx={{ padding: 0.3 }}>
                     <ChevronLeftIcon />
                 </IconButton>
                 {`${pagination.current_page} - ${pagination.page_numbers.at(
                     -1
                 )}`}
-                <IconButton onClick={handleNextPage} sx={{ padding: 0.3 }}>
+                <IconButton onClick={handleNextPage}>
                     <ChevronRightIcon />
                 </IconButton>
             </div>

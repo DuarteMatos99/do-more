@@ -1,13 +1,19 @@
 import React from "react";
+
+import "#styles/components/_dashboard.scss";
+import QuoteSection from "../QuoteSection/QuoteSection";
 import SectionHeader from "../SectionHeader";
 import TasksSection from "../TasksSection";
 
 const Dashboard = () => {
     return (
-        <div>
+        <section>
             <SectionHeader />
-            <TasksSection />
-        </div>
+            <div className="main-area">
+                <TasksSection />
+                <QuoteSection />
+            </div>
+        </section>
     );
 };
 
