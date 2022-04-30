@@ -43,6 +43,7 @@
   },
   "alias": {
       "#styles": "./src/components/styles",
-      "#hooks": "./src/hooks"
+      "#hooks": "./src/hooks",
+      "#shared": "./src/components/shared"
   }
 }

@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 
 import "#styles/components/_tasks.scss";
 import useTasks from "#hooks/useTasks.js";
+import SingleTask from "#shared/SingleTask";
 
 const iconButtonStyles = {
     width: "32px",
@@ -126,17 +127,13 @@ const ToDo = () => {
         <section className="to-do-area">
             <h3>To Do</h3>
             <div className="tasks-unchecked">
-                {tasksPaginated.map((obj) => {
+                {tasksPaginated.map((task) => {
                     return (
-                        <div className="single-task" key={obj.uuid}>
-                            <input
-                                type="checkbox"
-                                id={obj.uuid}
-                                className="checkbox-round"
-                                onClick={() => handleChecked(obj.uuid)}
-                            ></input>
-                            <label htmlFor={obj.uuid}>{obj.content}</label>
-                        </div>
+                        <SingleTask
+                            checkedCondition={false}
+                            task={task}
+                            handleChecked={handleChecked}
+                        />
                     );
                 })}
 

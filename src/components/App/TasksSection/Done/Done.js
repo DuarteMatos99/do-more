@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 
 import "#styles/components/_tasks.scss";
 import useTasks from "../../../../hooks/useTasks";
+import SingleTask from "#shared/SingleTask";
 
 const Done = () => {
     const { tasks, setTasks } = useTasks();
@@ -68,11 +69,7 @@ const Done = () => {
         }
     }
 
-    function changeRecentTask(e) {
-        setRecentTask(e.target.value);
-    }
-
-    function handleUnchecked(id) {
+    function handleChecked(id) {
         const taskIndex = tasks[1].done.findIndex((obj) => obj.uuid === id);
         const checkedTask = tasks[1].done[taskIndex];
 
@@ -102,18 +99,13 @@ const Done = () => {
         <section className="done-area">
             <h3>Done</h3>
             <div className="tasks-unchecked">
-                {tasksPaginated.map((obj) => {
+                {tasksPaginated.map((task) => {
                     return (
-                        <div className="single-task" key={obj.uuid}>
-                            <input
-                                type="checkbox"
-                                id={obj.uuid}
-                                className="checkbox-round"
-                                onChange={() => handleUnchecked(obj.uuid)}
-                                checked
-                            ></input>
-                            <label htmlFor={obj.uuid}>{obj.content}</label>
-                        </div>
+                        <SingleTask
+                            checkedCondition={true}
+                            task={task}
+                            handleChecked={handleChecked}
+                        />
                     );
                 })}
             </div>
