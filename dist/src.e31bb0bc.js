@@ -32952,7 +32952,6 @@ const QuoteSection = () => {
 
   _react.default.useEffect(() => {
     getQuoteAPI();
-    console.log("I");
   }, []);
 
   return /*#__PURE__*/_react.default.createElement("section", {
@@ -66697,13 +66696,12 @@ const SingleTask = _ref => {
     handleChecked
   } = _ref;
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "single-task",
-    key: task.uuid
+    className: "single-task"
   }, /*#__PURE__*/_react.default.createElement("input", {
     className: "checkbox-round",
     checked: checkedCondition,
     id: task.uuid,
-    onClick: () => handleChecked(task.uuid),
+    onChange: () => handleChecked(task.uuid),
     type: "checkbox"
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: task.uuid
@@ -66858,8 +66856,9 @@ const ToDo = () => {
   }, tasksPaginated.map(task => {
     return /*#__PURE__*/_react.default.createElement(_SingleTask.default, {
       checkedCondition: false,
-      task: task,
-      handleChecked: handleChecked
+      key: task.uuid,
+      handleChecked: handleChecked,
+      task: task
     });
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "single-task"
@@ -67017,8 +67016,9 @@ const Done = () => {
   }, tasksPaginated.map(task => {
     return /*#__PURE__*/_react.default.createElement(_SingleTask.default, {
       checkedCondition: true,
-      task: task,
-      handleChecked: handleChecked
+      handleChecked: handleChecked,
+      key: task.uuid,
+      task: task
     });
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "pagination"
@@ -67114,7 +67114,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const Dashboard = () => {
   return /*#__PURE__*/_react.default.createElement("section", null, /*#__PURE__*/_react.default.createElement(_SectionHeader.default, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "main-area"
-  }, /*#__PURE__*/_react.default.createElement(_TasksSection.default, null), /*#__PURE__*/_react.default.createElement(_QuoteSection.default, null)));
+  }, /*#__PURE__*/_react.default.createElement(_TasksSection.default, null)), /*#__PURE__*/_react.default.createElement(_QuoteSection.default, null));
 };
 
 var _default = Dashboard;
@@ -67206,7 +67206,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58574" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61778" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

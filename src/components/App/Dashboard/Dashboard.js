@@ -11,8 +11,8 @@ const Dashboard = () => {
             <SectionHeader />
             <div className="main-area">
                 <TasksSection />
-                <QuoteSection />
             </div>
+            <QuoteSection />
         </section>
     );
 };

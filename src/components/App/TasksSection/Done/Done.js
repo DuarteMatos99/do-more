@@ -103,8 +103,9 @@ const Done = () => {
                     return (
                         <SingleTask
                             checkedCondition={true}
-                            task={task}
                             handleChecked={handleChecked}
+                            key={task.uuid}
+                            task={task}
                         />
                     );
                 })}

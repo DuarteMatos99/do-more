@@ -131,8 +131,9 @@ const ToDo = () => {
                     return (
                         <SingleTask
                             checkedCondition={false}
-                            task={task}
+                            key={task.uuid}
                             handleChecked={handleChecked}
+                            task={task}
                         />
                     );
                 })}

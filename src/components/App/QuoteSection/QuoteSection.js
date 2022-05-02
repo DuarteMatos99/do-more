@@ -28,7 +28,6 @@ const QuoteSection = () => {
 
     React.useEffect(() => {
         getQuoteAPI();
-        console.log("I");
     }, []);
 
     return (
