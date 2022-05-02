@@ -1,12 +1,11 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddIcon from "@mui/icons-material/Add";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import IconButton from "@mui/material/IconButton";
 
 import "#styles/components/_tasks.scss";
-import useTasks from "#hooks/useTasks.js";
+import useTasks from "#hooks/useTasks";
+import Pagination from "#shared/Pagination";
 import SingleTask from "#shared/SingleTask";
 
 const iconButtonStyles = {
@@ -57,6 +56,7 @@ const ToDo = () => {
 
         if (
             tasksLength % pagination.tasks_per_page === 0 + 1 ||
+            tasksLength % pagination.tasks_per_page === 0 ||
             correct_tasks.length === 0
         ) {
             updatePageNumbers();
@@ -151,18 +151,11 @@ const ToDo = () => {
                 </div>
             </div>
 
-            {/*Pagination*/}
-            <div className="pagination">
-                <IconButton onClick={handlePreviousPage} sx={{ padding: 0.3 }}>
-                    <ChevronLeftIcon />
-                </IconButton>
-                {`${pagination.current_page} - ${pagination.page_numbers.at(
-                    -1
-                )}`}
-                <IconButton onClick={handleNextPage} sx={{ padding: 0.3 }}>
-                    <ChevronRightIcon />
-                </IconButton>
-            </div>
+            <Pagination
+                handleNextPage={handleNextPage}
+                handlePreviousPage={handlePreviousPage}
+                pagination={pagination}
+            />
         </section>
     );
 };

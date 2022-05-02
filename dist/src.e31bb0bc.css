@@ -37,7 +37,7 @@ code {
 .quote-area {
   text-align: center;
   position: absolute;
-  bottom: 0;
+  bottom: 6%;
   width: 100%;
 }
 
@@ -124,7 +124,7 @@ hr {
 }
 
 .checkbox-round:checked {
-  background-image: url("/check-mark.a02f1879.png");
+  background-image: url("/check-mark.2681fda7.png");
   background-repeat: no-repeat;
   background-position: center;
 }
