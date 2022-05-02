@@ -1,0 +1,27 @@
+.single-task {
+    align-items: center;
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.single-task input, ::-webkit-input-placeholder {
+    outline: none;
+    border: none;
+    font-size: 1em;
+}
+
+.single-task label {
+    white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+    width: 80%;
+}
+
+.single-task:hover + more-icon {
+    display: block;
+}
+
+.more-icon {
+    visibility: hidden;
+}

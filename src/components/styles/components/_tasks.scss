@@ -4,14 +4,8 @@
     width: 50%;
     box-sizing: border-box; 
     text-align: left;
-    padding-left: 15%;
+    padding-left: 10%;
     position: relative;
-}
-
-.single-task input, ::-webkit-input-placeholder {
-    outline: none;
-    border: none;
-    font-size: 1em;
 }
 
 .done-area {
@@ -28,27 +22,22 @@
     margin-top: 3%;
 }
 
-.single-task {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 .checkbox-round {
-    width: 32px;
-    height: 32px;
-    background-color: #C4C4C4;
-    border-radius: 50%;
-    vertical-align: middle;
-    border: 1px solid #fff;
     appearance: none;
-    -webkit-appearance: none;
-    outline: none;
+    background-color: #C4C4C4;
+    border: 1px solid #fff;
+    border-radius: 50%;
     cursor: pointer;
-    margin-right: 5px;
+    height: 32px;
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+    outline: none;
+    width: 32px;
+    -webkit-appearance: none;
 }
 
 .checkbox-round:checked{
     background-image: url('../../icons/check-mark.png');
-    background-repeat: no-repeat;
     background-position: center;
+    background-repeat: no-repeat;
 }

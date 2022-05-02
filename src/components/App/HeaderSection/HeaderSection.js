@@ -1,6 +1,6 @@
 import React from "react";
 
-import "#styles/components/_section-header.scss";
+import "#styles/components/_header-section.scss";
 
 import TitleDate from "./TitleDate";
 

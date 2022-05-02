@@ -32963,7 +32963,7 @@ const QuoteSection = () => {
 
 var _default = QuoteSection;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","#styles/components/_quote-section.scss":"components/styles/components/_quote-section.scss"}],"components/styles/components/_section-header.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","#styles/components/_quote-section.scss":"components/styles/components/_quote-section.scss"}],"components/styles/components/_header-section.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -33012,7 +33012,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-require("#styles/components/_section-header.scss");
+require("#styles/components/_header-section.scss");
 
 var _TitleDate = _interopRequireDefault(require("./TitleDate"));
 
@@ -33032,7 +33032,7 @@ const HeaderSection = () => {
 
 var _default = HeaderSection;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","#styles/components/_section-header.scss":"components/styles/components/_section-header.scss","./TitleDate":"components/App/HeaderSection/TitleDate/index.js"}],"components/App/HeaderSection/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","#styles/components/_header-section.scss":"components/styles/components/_header-section.scss","./TitleDate":"components/App/HeaderSection/TitleDate/index.js"}],"components/App/HeaderSection/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -66716,7 +66716,31 @@ const Pagination = _ref => {
 
 var _default = Pagination;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@mui/icons-material/ChevronRight":"../node_modules/@mui/icons-material/ChevronRight.js","@mui/icons-material/ChevronLeft":"../node_modules/@mui/icons-material/ChevronLeft.js","@mui/material/IconButton":"../node_modules/@mui/material/IconButton/index.js"}],"components/shared/SingleTask.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@mui/icons-material/ChevronRight":"../node_modules/@mui/icons-material/ChevronRight.js","@mui/icons-material/ChevronLeft":"../node_modules/@mui/icons-material/ChevronLeft.js","@mui/material/IconButton":"../node_modules/@mui/material/IconButton/index.js"}],"../node_modules/@mui/icons-material/MoreVert.js":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
+
+var _jsxRuntime = require("react/jsx-runtime");
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+}), 'MoreVert');
+
+exports.default = _default;
+},{"@babel/runtime/helpers/interopRequireDefault":"../node_modules/@babel/runtime/helpers/interopRequireDefault.js","./utils/createSvgIcon":"../node_modules/@mui/icons-material/utils/createSvgIcon.js","react/jsx-runtime":"../node_modules/react/jsx-runtime.js"}],"components/styles/components/_single-task.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/shared/SingleTask.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -66726,7 +66750,11 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-require("#styles/components/_tasks.scss");
+var _IconButton = _interopRequireDefault(require("@mui/material/IconButton"));
+
+var _MoreVert = _interopRequireDefault(require("@mui/icons-material/MoreVert"));
+
+require("#styles/components/_single-task.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66746,12 +66774,17 @@ const SingleTask = _ref => {
     type: "checkbox"
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: task.uuid
-  }, task.content));
+  }, task.content), /*#__PURE__*/_react.default.createElement(_IconButton.default, {
+    className: "more-icon",
+    sx: {
+      padding: 0.3
+    }
+  }, /*#__PURE__*/_react.default.createElement(_MoreVert.default, null)));
 };
 
 var _default = SingleTask;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","#styles/components/_tasks.scss":"components/styles/components/_tasks.scss"}],"components/App/TasksSection/ToDo/ToDo.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@mui/material/IconButton":"../node_modules/@mui/material/IconButton/index.js","@mui/icons-material/MoreVert":"../node_modules/@mui/icons-material/MoreVert.js","#styles/components/_single-task.scss":"components/styles/components/_single-task.scss"}],"components/App/TasksSection/ToDo/ToDo.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67225,7 +67258,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55891" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62326" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

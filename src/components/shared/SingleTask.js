@@ -1,6 +1,8 @@
 import React from "react";
+import IconButton from "@mui/material/IconButton";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import "#styles/components/_tasks.scss";
+import "#styles/components/_single-task.scss";
 
 const SingleTask = ({ checkedCondition, task, handleChecked }) => {
     return (
@@ -13,6 +15,10 @@ const SingleTask = ({ checkedCondition, task, handleChecked }) => {
                 type="checkbox"
             ></input>
             <label htmlFor={task.uuid}>{task.content}</label>
+
+            <IconButton className="more-icon" sx={{ padding: 0.3 }}>
+                <MoreVertIcon />
+            </IconButton>
         </div>
     );
 };

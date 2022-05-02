@@ -1,12 +1,13 @@
 .quote-area {
-    text-align: center;
+    bottom: 5%;
     position: absolute;
-    bottom: 6%;
+    text-align: center;
     width: 100%; 
 }
 
 .quote {
+    align-items: center;
     display: flex;
-    justify-content: center;
     gap: 5px;
+    justify-content: center;
 }

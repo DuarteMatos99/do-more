@@ -35,19 +35,20 @@ code {
   }
 }
 .quote-area {
-  text-align: center;
+  bottom: 5%;
   position: absolute;
-  bottom: 6%;
+  text-align: center;
   width: 100%;
 }
 
 .quote {
+  align-items: center;
   display: flex;
-  justify-content: center;
   gap: 5px;
+  justify-content: center;
 }
 .header-area {
-  padding: 4%;
+  padding: 3%;
   background-color: #C69B7B;
   margin: 0;
   text-align: center;
@@ -55,16 +56,16 @@ code {
 
 .title-logo {
   font-size: 3em;
+  margin-bottom: 0;
 }
 
 .title-date {
   font-size: 1.3em;
-  margin-top: 30px;
 }
 .tasks-area {
   display: flex;
   justify-content: center;
-  margin-top: 8%;
+  margin-top: 6%;
   margin-bottom: 8%;
 }
 
@@ -82,14 +83,8 @@ hr {
   width: 50%;
   box-sizing: border-box;
   text-align: left;
-  padding-left: 15%;
+  padding-left: 10%;
   position: relative;
-}
-
-.single-task input, ::-webkit-input-placeholder {
-  outline: none;
-  border: none;
-  font-size: 1em;
 }
 
 .done-area {
@@ -104,29 +99,51 @@ hr {
   margin-top: 3%;
 }
 
-.single-task {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .checkbox-round {
-  width: 32px;
-  height: 32px;
-  background-color: #C4C4C4;
-  border-radius: 50%;
-  vertical-align: middle;
-  border: 1px solid #fff;
   appearance: none;
-  -webkit-appearance: none;
-  outline: none;
+  background-color: #C4C4C4;
+  border: 1px solid #fff;
+  border-radius: 50%;
   cursor: pointer;
-  margin-right: 5px;
+  height: 32px;
+  margin: 0 5px 0 0;
+  vertical-align: middle;
+  outline: none;
+  width: 32px;
+  -webkit-appearance: none;
 }
 
 .checkbox-round:checked {
   background-image: url("/check-mark.2681fda7.png");
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
+}
+.single-task {
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.single-task input, ::-webkit-input-placeholder {
+  outline: none;
+  border: none;
+  font-size: 1em;
+}
+
+.single-task label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+}
+
+.single-task:hover + more-icon {
+  display: block;
+}
+
+.more-icon {
+  visibility: hidden;
 }
 .App {
   text-align: center;
