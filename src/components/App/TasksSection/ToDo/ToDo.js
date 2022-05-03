@@ -97,22 +97,6 @@ const ToDo = () => {
         setRecentTask("");
     }
 
-    function handleChecked(id) {
-        const taskIndex = tasks[0].to_be_done.findIndex(
-            (obj) => obj.uuid === id
-        );
-        const checkedTask = tasks[0].to_be_done[taskIndex];
-
-        setTasks([
-            {
-                to_be_done: tasks[0].to_be_done.filter(function (obj) {
-                    return obj !== checkedTask;
-                }),
-            },
-            { done: [checkedTask, ...tasks[1].done] },
-        ]);
-    }
-
     React.useEffect(() => {
         changeTasksPaginated();
     }, [tasks, pagination.current_page]);
@@ -132,8 +116,9 @@ const ToDo = () => {
                         <SingleTask
                             checkedCondition={false}
                             key={task.uuid}
-                            handleChecked={handleChecked}
                             task={task}
+                            taskType="to_be_done"
+                            taskTypeIndex={0}
                         />
                     );
                 })}

@@ -138,12 +138,12 @@ hr {
   width: 80%;
 }
 
-.single-task:hover + more-icon {
+.single-task:hover .more-icon {
   display: block;
 }
 
 .more-icon {
-  visibility: hidden;
+  display: none;
 }
 .App {
   text-align: center;

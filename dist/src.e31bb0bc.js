@@ -66716,7 +66716,7 @@ const Pagination = _ref => {
 
 var _default = Pagination;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@mui/icons-material/ChevronRight":"../node_modules/@mui/icons-material/ChevronRight.js","@mui/icons-material/ChevronLeft":"../node_modules/@mui/icons-material/ChevronLeft.js","@mui/material/IconButton":"../node_modules/@mui/material/IconButton/index.js"}],"../node_modules/@mui/icons-material/MoreVert.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@mui/icons-material/ChevronRight":"../node_modules/@mui/icons-material/ChevronRight.js","@mui/icons-material/ChevronLeft":"../node_modules/@mui/icons-material/ChevronLeft.js","@mui/material/IconButton":"../node_modules/@mui/material/IconButton/index.js"}],"../node_modules/@mui/icons-material/Delete.js":[function(require,module,exports) {
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -66731,8 +66731,8 @@ var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
 var _jsxRuntime = require("react/jsx-runtime");
 
 var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-  d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-}), 'MoreVert');
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), 'Delete');
 
 exports.default = _default;
 },{"@babel/runtime/helpers/interopRequireDefault":"../node_modules/@babel/runtime/helpers/interopRequireDefault.js","./utils/createSvgIcon":"../node_modules/@mui/icons-material/utils/createSvgIcon.js","react/jsx-runtime":"../node_modules/react/jsx-runtime.js"}],"components/styles/components/_single-task.scss":[function(require,module,exports) {
@@ -66752,7 +66752,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _IconButton = _interopRequireDefault(require("@mui/material/IconButton"));
 
-var _MoreVert = _interopRequireDefault(require("@mui/icons-material/MoreVert"));
+var _Delete = _interopRequireDefault(require("@mui/icons-material/Delete"));
+
+var _useTasks = _interopRequireDefault(require("#hooks/useTasks"));
 
 require("#styles/components/_single-task.scss");
 
@@ -66762,29 +66764,60 @@ const SingleTask = _ref => {
   let {
     checkedCondition,
     task,
-    handleChecked
+    taskType,
+    taskTypeIndex
   } = _ref;
+  const {
+    tasks,
+    setTasks
+  } = (0, _useTasks.default)();
+
+  const handleChecked = (task_uuid, taskType, taskTypeIndex, actionType) => {
+    const taskIndex = tasks[taskTypeIndex][taskType].findIndex(obj => obj.uuid === task_uuid);
+    const checkedTask = tasks[taskTypeIndex][taskType][taskIndex];
+
+    if (taskType === "to_be_done") {
+      setTasks([{
+        to_be_done: tasks[0].to_be_done.filter(function (obj) {
+          return obj !== checkedTask;
+        })
+      }, {
+        done: actionType === "delete" ? [...tasks[1].done] : [checkedTask, ...tasks[1].done]
+      }]);
+    } else if (taskType === "done") {
+      setTasks([{
+        to_be_done: actionType === "delete" ? [...tasks[0].to_be_done] : [checkedTask, ...tasks[0].to_be_done]
+      }, {
+        done: tasks[1].done.filter(function (obj) {
+          return obj !== checkedTask;
+        })
+      }]);
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "single-task"
   }, /*#__PURE__*/_react.default.createElement("input", {
     className: "checkbox-round",
     checked: checkedCondition,
     id: task.uuid,
-    onChange: () => handleChecked(task.uuid),
+    onChange: () => handleChecked(task.uuid, taskType, taskTypeIndex, "change_side"),
     type: "checkbox"
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: task.uuid
-  }, task.content), /*#__PURE__*/_react.default.createElement(_IconButton.default, {
-    className: "more-icon",
+  }, task.content), /*#__PURE__*/_react.default.createElement("div", {
+    className: "more-icon"
+  }, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
+    onClick: () => handleChecked(task.uuid, taskType, taskTypeIndex, "delete"),
     sx: {
       padding: 0.3
     }
-  }, /*#__PURE__*/_react.default.createElement(_MoreVert.default, null)));
+  }, /*#__PURE__*/_react.default.createElement(_Delete.default, null))));
 };
 
 var _default = SingleTask;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@mui/material/IconButton":"../node_modules/@mui/material/IconButton/index.js","@mui/icons-material/MoreVert":"../node_modules/@mui/icons-material/MoreVert.js","#styles/components/_single-task.scss":"components/styles/components/_single-task.scss"}],"components/App/TasksSection/ToDo/ToDo.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@mui/material/IconButton":"../node_modules/@mui/material/IconButton/index.js","@mui/icons-material/Delete":"../node_modules/@mui/icons-material/Delete.js","#hooks/useTasks":"hooks/useTasks.js","#styles/components/_single-task.scss":"components/styles/components/_single-task.scss"}],"components/App/TasksSection/ToDo/ToDo.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -66899,18 +66932,6 @@ const ToDo = () => {
     setRecentTask("");
   }
 
-  function handleChecked(id) {
-    const taskIndex = tasks[0].to_be_done.findIndex(obj => obj.uuid === id);
-    const checkedTask = tasks[0].to_be_done[taskIndex];
-    setTasks([{
-      to_be_done: tasks[0].to_be_done.filter(function (obj) {
-        return obj !== checkedTask;
-      })
-    }, {
-      done: [checkedTask, ...tasks[1].done]
-    }]);
-  }
-
   _react.default.useEffect(() => {
     changeTasksPaginated();
   }, [tasks, pagination.current_page]);
@@ -66929,8 +66950,9 @@ const ToDo = () => {
     return /*#__PURE__*/_react.default.createElement(_SingleTask.default, {
       checkedCondition: false,
       key: task.uuid,
-      handleChecked: handleChecked,
-      task: task
+      task: task,
+      taskType: "to_be_done",
+      taskTypeIndex: 0
     });
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "single-task"
@@ -67047,18 +67069,6 @@ const Done = () => {
     }
   }
 
-  function handleChecked(id) {
-    const taskIndex = tasks[1].done.findIndex(obj => obj.uuid === id);
-    const checkedTask = tasks[1].done[taskIndex];
-    setTasks([{
-      to_be_done: [checkedTask, ...tasks[0].to_be_done]
-    }, {
-      done: tasks[1].done.filter(function (obj) {
-        return obj !== checkedTask;
-      })
-    }]);
-  }
-
   _react.default.useEffect(() => {
     changeTasksPaginated();
   }, [tasks, pagination.current_page]);
@@ -67076,9 +67086,10 @@ const Done = () => {
   }, tasksPaginated.map(task => {
     return /*#__PURE__*/_react.default.createElement(_SingleTask.default, {
       checkedCondition: true,
-      handleChecked: handleChecked,
       key: task.uuid,
-      task: task
+      task: task,
+      taskType: "done",
+      taskTypeIndex: 1
     });
   })), /*#__PURE__*/_react.default.createElement(_Pagination.default, {
     handleNextPage: handleNextPage,
@@ -67258,7 +67269,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62326" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50254" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

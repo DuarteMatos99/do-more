@@ -68,22 +68,6 @@ const Done = () => {
         }
     }
 
-    function handleChecked(id) {
-        const taskIndex = tasks[1].done.findIndex((obj) => obj.uuid === id);
-        const checkedTask = tasks[1].done[taskIndex];
-
-        setTasks([
-            {
-                to_be_done: [checkedTask, ...tasks[0].to_be_done],
-            },
-            {
-                done: tasks[1].done.filter(function (obj) {
-                    return obj !== checkedTask;
-                }),
-            },
-        ]);
-    }
-
     React.useEffect(() => {
         changeTasksPaginated();
     }, [tasks, pagination.current_page]);
@@ -102,14 +86,15 @@ const Done = () => {
                     return (
                         <SingleTask
                             checkedCondition={true}
-                            handleChecked={handleChecked}
                             key={task.uuid}
                             task={task}
+                            taskType="done"
+                            taskTypeIndex={1}
                         />
                     );
                 })}
             </div>
-            {/*Pagination*/}
+
             <Pagination
                 handleNextPage={handleNextPage}
                 handlePreviousPage={handlePreviousPage}
